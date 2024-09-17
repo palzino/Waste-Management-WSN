@@ -17,7 +17,7 @@
     <motetype>
       org.contikios.cooja.mspmote.SkyMoteType
       <description>bin</description>
-      <source>[CONFIG_DIR]/src/bin.c</source>
+      <source>[CONFIG_DIR]/bin.c</source>
       <commands>$(MAKE) -j$(CPUS) bin.sky TARGET=sky</commands>
       <firmware>[CONFIG_DIR]/build/sky/bin.sky</firmware>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>
@@ -248,7 +248,7 @@
     <motetype>
       org.contikios.cooja.mspmote.SkyMoteType
       <description>control</description>
-      <source>[CONFIG_DIR]/src/control.c</source>
+      <source>[CONFIG_DIR]/control.c</source>
       <commands>$(MAKE) -j$(CPUS) control.sky TARGET=sky</commands>
       <firmware>[CONFIG_DIR]/build/sky/control.sky</firmware>
       <moteinterface>org.contikios.cooja.interfaces.Position</moteinterface>

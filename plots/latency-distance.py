@@ -39,7 +39,6 @@ b20 = Coordinate(129.098, 10.975)
 b21 = Coordinate(100.219, 9.047)
 b22 = Coordinate(161.207, 67.874)
 
-
 distances = [
     distance(b2, s1),  # 2
     distance(b3, s1),  # 3
@@ -63,6 +62,8 @@ distances = [
     distance(b21, s1),  # 21
     distance(b22, s1),  # 22
 ]
+
+# As calculated in latency.py
 
 latencies = [
     162.233606557377046,  # 2

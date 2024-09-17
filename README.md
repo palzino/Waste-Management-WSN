@@ -1,6 +1,6 @@
 # [Design and Simulation of a Next-Generation Wireless Sensor Network for Waste Management in Smart Cities](url)
 
-Palvir Singh Gill, Jack Devey, Moad Idrissi
+Palvir Singh Gill, Jack Devey, Moad Idrissi **!!!ADD MORE AUTHORS!!!**
 
 ## Contiki Source Code
 - The Contiki source code for the root node can be found in `control.c`

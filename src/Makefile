@@ -1,9 +1,10 @@
 CONTIKI_PROJECT = bin control
 all: $(CONTIKI_PROJECT)
 
-CONTIKI=../..
+CONTIKI=../../..
 
 TARGET_LIBFILES = -lm
 
+MAKE_ROUTING = MAKE_ROUTING_RPL_CLASSIC
 
 include $(CONTIKI)/Makefile.include

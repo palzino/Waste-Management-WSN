@@ -15,9 +15,14 @@
 #define BUF_SIZE 4
 
 #define CHECK_INTERVAL (60 * CLOCK_SECOND)
-#define MAX_BINS 25
+#define BUSY_INTERVAL (30 * 60 * CLOCK_SECOND)
+#define MAX_BINS 100
 
 static struct simple_udp_connection udp_conn;
+
+static bool will_empty = false;
+static bool actually_emptying = false;
+static uip_ipaddr_t *emptying = NULL;
 
 typedef struct {
   uip_ipaddr_t *addr;
@@ -100,10 +105,12 @@ uip_ipaddr_t *fullness_list_get_max_ip(fullness_list *list) {
 
 static fullness_list list; // The fullness list of bins
 static struct etimer check_timer; // Timer to check if all readings are in
+static struct etimer busy_timer; // Timer to wait for whilst "busy" during cleaning
 
 // Register the receiver and cleaner processes
 PROCESS(receiver_process, "Receiver Process");
 PROCESS(cleaner_process, "Cleaner Process");
+PROCESS(emptying_processs, "Busy Process");
 
 /*---------------------------------------------------------------------------*/
 static void udp_rx_callback(struct simple_udp_connection *c,
@@ -162,25 +169,20 @@ PROCESS_THREAD(cleaner_process, ev, data)
   while (1) {
     PROCESS_WAIT_EVENT();
     if (ev == PROCESS_EVENT_TIMER && data == &check_timer) {
-      LOG_INFO("[buffer_size]{%d/5}\n", list.size);
-      if (fullness_list_size_is(&list, 5)) {
+      LOG_INFO("[buffer_size]{%d/21}\n", list.size);
+      if (fullness_list_size_is(&list, 21) && !(actually_emptying || will_empty)) {
         // Sort the list of fullness readings
         fullness_list_sort(&list);
         // Get the IP of the fullest bin
         uip_ipaddr_t *addr = fullness_list_get_max_ip(&list);
-        // Prepare the "EMPTY" string
-        static char str[10];
-        snprintf(str, sizeof(str), "EMPTY");
-        // Send the string
-        simple_udp_sendto(&udp_conn, str, strlen(str), addr);
+        // Store as emptying
+        emptying = addr;
         // Print details
-        LOG_INFO("[sent_empty_signal]{");
+        LOG_INFO("[will_empty]{");
         LOG_INFO_6ADDR(addr);
         LOG_INFO_("}\n");
-        // Print details
-        LOG_INFO("[buffer_reset]\n");
-        // Clear the list
-        fullness_list_free(&list);
+        // Set will empty
+        will_empty = true;
       }
 
       // Reset the time
@@ -191,5 +193,60 @@ PROCESS_THREAD(cleaner_process, ev, data)
   PROCESS_END();
 }
 
+PROCESS_THREAD(emptying_processs, ev, data)
+{
+  PROCESS_BEGIN();
+
+  // Set up the timer
+  etimer_set(&busy_timer, CHECK_INTERVAL);
+
+  while (1) {
+    PROCESS_WAIT_EVENT();
+    if (ev == PROCESS_EVENT_TIMER && data == &busy_timer) {
+      // If actually busy and the timer has gone off
+      if (actually_emptying) {
+        // Prepare the "EMPTY" string
+        static char str[10];
+        snprintf(str, sizeof(str), "EMPTY");
+        // Send the string
+        simple_udp_sendto(&udp_conn, str, strlen(str), emptying);
+        // Print details
+        LOG_INFO("[sent_empty_signal]{");
+        LOG_INFO_6ADDR(emptying);
+        LOG_INFO_("}\n");
+        // Print details
+        LOG_INFO("[buffer_reset]\n");
+        // Clear the list
+        fullness_list_free(&list);
+        // Reset lock
+        will_empty = false;
+        actually_emptying = false;
+      }
+
+
+      if (will_empty) {
+        // Reset the time
+        etimer_set(&busy_timer, BUSY_INTERVAL);
+        actually_emptying = true;
+        will_empty = false;
+        // Prepare the "EMPTYING" string
+        static char str[10];
+        snprintf(str, sizeof(str), "EMPTYING");
+        // Send the string
+        simple_udp_sendto(&udp_conn, str, strlen(str), emptying);
+        // Print details
+        LOG_INFO("[started_emptying]{");
+        LOG_INFO_6ADDR(emptying);
+        LOG_INFO_("}\n");
+      } else {
+        // Reset the time
+        etimer_set(&busy_timer, CHECK_INTERVAL);
+      }
+    }
+  }
+
+  PROCESS_END();
+}
+
 // Start the receiver and cleaner processes
-AUTOSTART_PROCESSES(&receiver_process, &cleaner_process);
+AUTOSTART_PROCESSES(&receiver_process, &cleaner_process, &emptying_processs);

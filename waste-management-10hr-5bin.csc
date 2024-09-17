@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <simconf version="2023090101">
   <simulation>
-    <title>My simulation</title>
+    <title>waste-management-10hr-5bin</title>
     <randomseed>123456</randomseed>
     <motedelay_us>1000000</motedelay_us>
     <radiomedium>
@@ -127,7 +127,7 @@
       <skin>org.contikios.cooja.plugins.skins.UDGMVisualizerSkin</skin>
       <viewport>1.123591109795661 0.0 0.0 1.123591109795661 156.7874174138778 136.72558352872497</viewport>
     </plugin_config>
-    <bounds x="1" y="1" height="400" width="400" />
+    <bounds x="1" y="1" height="400" width="400" z="1" />
   </plugin>
   <plugin>
     org.contikios.cooja.plugins.LogListener
@@ -136,7 +136,7 @@
       <formatted_time />
       <coloring />
     </plugin_config>
-    <bounds x="402" y="161" height="475" width="1508" z="1" />
+    <bounds x="402" y="161" height="475" width="1508" />
   </plugin>
   <plugin>
     org.contikios.cooja.plugins.TimeLine

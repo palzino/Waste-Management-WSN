@@ -24,6 +24,10 @@ static struct simple_udp_connection udp_conn;
 static int dirty_time = 0; // Time in minutes between cleans
 static int real_time = 0; // Time in minutes real
 static int fullness = 0; // Fullness percentage of the bin
+static bool emptying = false;
+
+static int initial_waste = 0;
+static int growth_rate = 0;
 
 int random_in_range(int min, int max) {
     // Ensure min is less than or equal to max
@@ -36,10 +40,27 @@ int random_in_range(int min, int max) {
     return min + (random_rand() % (max - min + 1));
 }
 
-static int calculate_waste_exponential(int initial_waste, int growth_rate, int time) {
-  double growth_rate_decimal = (double)growth_rate / 100;
-  double result = initial_waste * expf(growth_rate_decimal * time);
-  return (int)result;
+static int calculate_waste_linear(int current, int growth_rate, int time) {
+  if (time % 5 == 0) {
+
+    if (emptying && current == 0) {
+      emptying = false;
+    }
+
+    int delta = growth_rate;
+    
+    int out = current + delta;
+
+    if (out >= 100) {
+      return 100;
+    } else if (out <= 0) {
+      return 0;
+    } else {
+      return out;
+    }
+  } else {
+    return current;
+  }
 }
 
 /*---------------------------------------------------------------------------*/
@@ -67,6 +88,21 @@ udp_rx_callback(struct simple_udp_connection *c,
     // Reset the bin
     fullness = 0;
     dirty_time = 0;
+    emptying = false;
+    // New growth rate
+    growth_rate = random_in_range(1, 5);
+  }
+  // Compare to emptying
+  if(strcmp(received_data, "EMPTYING") == 0) {
+    // Log empty has been received
+    LOG_INFO("[emptying]{");
+    LOG_INFO_6ADDR(sender_addr);
+    LOG_INFO_("}\n");
+    // Reset the bin
+    dirty_time = 0;
+    emptying = true;
+    // New growth rate
+    growth_rate = -25;
   }
 }
 /*---------------------------------------------------------------------------*/
@@ -76,17 +112,17 @@ PROCESS_THREAD(udp_client_process, ev, data)
   static uint8_t buf[BUF_SIZE];
   uip_ipaddr_t dest_ipaddr;
 
-  static int initial_waste = 0;
-  static int growth_rate = 0;
-
   PROCESS_BEGIN();
 
   // Set seed as node id
   random_init(node_id);
 
   // Calculate values at random
-  initial_waste = random_in_range(0, 10);
-  growth_rate = random_in_range(0, 5);
+  fullness = random_in_range(0, 10);
+  growth_rate = random_in_range(1, 5);
+
+
+
   // Print these
   LOG_INFO("[model_params]{%d,%d}\n", initial_waste, growth_rate);
 
@@ -101,7 +137,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
 
     if (NETSTACK_ROUTING.node_is_reachable() && NETSTACK_ROUTING.get_root_ipaddr(&dest_ipaddr)) {
       // Calculate the fullness value at current time
-      fullness += calculate_waste_exponential(initial_waste, growth_rate, dirty_time);
+      fullness = calculate_waste_linear(fullness, growth_rate, dirty_time);
       // Serialize fullness int to byte array
       memcpy(buf, &fullness, sizeof(fullness));
       // Send the data

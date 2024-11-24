@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+title: >-
+  Developing a Smart Wireless Sensor Network for Waste
+  Management in Cities (Software)
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Palvir Singh
+    family-names: Gill
+    email: palvir.gill@mail.bcu.ac.uk
+    affiliation: Birmingham City University
+    orcid: 'https://orcid.org/0009-0002-7791-3556'
+  - given-names: Jack
+    family-names: Devey
+    email: jack.devey@mail.bcu.ac.uk
+    affiliation: Birmingham City University
+    orcid: 'https://orcid.org/0009-0002-9513-2817'
+  - given-names: Moad
+    family-names: Idrissi
+    email: moad.i@oryx.edu.qa
+    affiliation: >-
+      Oryx Universal College | Liverpool John Moores
+      University (OUC-LJMU)
+    orcid: 'https://orcid.org/0000-0002-9995-3180'
+  - given-names: Haitham
+    family-names: Mahmoud
+    email: haitham.mahmoud@bcu.ac.uk
+    affiliation: Birmingham City University
+  - given-names: Shaheed
+    family-names: Parvez
+    email: shaheed.parvez@bcu.ac.uk
+    affiliation: Birmingham City University
+  - given-names: Rehan
+    family-names: Bhana
+    email: rehan.bhana@bcu.ac.uk
+    affiliation: Birmingham City University
+keywords:
+  - Wireless Sensor Network (WSN)
+  - Smart Cities
+  - Artificial Intelligence
+  - Waste Management

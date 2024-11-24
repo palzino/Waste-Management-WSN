@@ -6,7 +6,7 @@
 2. School of Computing and Data Science, Oryx Universal College | Liverpool John Moores University (OUC-LJMU), Doha, Qatar </br> `moad.i@oryx.edu.qa`
 
 > [!NOTE]
-> This repository includes all supporting source code including the full simulation environment for "Design and Simulation of a Next-Generation Wireless Sensor Network for Waste Management in Smart Cities"
+> This repository includes all supporting source code including the full simulation environment for "[Design and Simulation of a Next-Generation Wireless Sensor Network for Waste Management in Smart Cities]()"
 
 ## Contiki Source Code
 - The Contiki source code for the root node can be found in `control.c`

@@ -2,7 +2,7 @@
 
 **Palvir Singh Gill**<sup>1</sup> <a href="https://orcid.org/0009-0002-7791-3556"><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" width="16"></a>, **Jack Devey**<sup>1</sup> <a href="https://orcid.org/0009-0002-9513-2817"><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" width="16"></a>, **Moad Idrissi**<sup>2</sup> <a href="https://orcid.org/0000-0002-9995-3180"><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" width="16"></a>, **Haitham Mahmoud**<sup>1</sup>, **Shaheed Parvez**<sup>1</sup>, **Rehan Bhana**<sup>1</sup>
 
-1. College of Computing, Birmingham City University, Birmingham B4 7RQ, UK </br> `{palvir.gill,jack.devey}@mail.bcu.ac.uk, {shaheed.parvez,haitham.mahmoud,rehan.bhana}@bcu.ac.uk`
+1. College of Computing, Birmingham City University, Birmingham B4 7RQ, UK </br> `{palvir.gill,jack.devey}@mail.bcu.ac.uk, {haitham.mahmoud,shaheed.parvez,rehan.bhana}@bcu.ac.uk`
 2. School of Computing and Data Science, Oryx Universal College | Liverpool John Moores University (OUC-LJMU), Doha, Qatar </br> `moad.i@oryx.edu.qa`
 
 > [!NOTE]

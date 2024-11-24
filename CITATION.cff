@@ -1,11 +1,8 @@
 cff-version: 1.2.0
 title: >-
   Developing a Smart Wireless Sensor Network for Waste
-  Management in Cities (Software)
-message: >-
-  If you use this software, please cite it using the
-  metadata from this file.
-type: software
+  Management in Cities
+type: conference-paper
 authors:
   - given-names: Palvir Singh
     family-names: Gill
@@ -36,6 +33,7 @@ authors:
     family-names: Bhana
     email: rehan.bhana@bcu.ac.uk
     affiliation: Birmingham City University
+year: 2024
 keywords:
   - Wireless Sensor Network (WSN)
   - Smart Cities

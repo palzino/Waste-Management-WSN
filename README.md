@@ -1,4 +1,4 @@
-# [Design and Simulation of a Next-Generation Wireless Sensor Network for Waste Management in Smart Cities]([url](https://doi.org/10.1007/978-3-031-91351-8_12))
+# [Design and Simulation of a Next-Generation Wireless Sensor Network for Waste Management in Smart Cities](https://doi.org/10.1007/978-3-031-91351-8_12)
 
 **Palvir Singh Gill**<sup>1</sup> <a href="https://orcid.org/0009-0002-7791-3556"><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" width="16"></a>, **Jack Devey**<sup>1</sup> <a href="https://orcid.org/0009-0002-9513-2817"><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" width="16"></a>, **Moad Idrissi**<sup>2</sup> <a href="https://orcid.org/0000-0002-9995-3180"><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" width="16"></a>, **Haitham Mahmoud**<sup>1</sup>, **Shaheed Parvez**<sup>1</sup> <a href="https://orcid.org/0009-0000-8699-0006"><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" width="16"></a>, **Rehan Bhana**<sup>1</sup>
 

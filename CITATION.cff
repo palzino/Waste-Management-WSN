@@ -33,7 +33,7 @@ authors:
     family-names: Bhana
     email: rehan.bhana@bcu.ac.uk
     affiliation: Birmingham City University
-year: 2024
+year: 2025
 preferred-citation:
   type: conference-paper
   title: >-
@@ -69,7 +69,10 @@ preferred-citation:
     family-names: Bhana
     email: rehan.bhana@bcu.ac.uk
     affiliation: Birmingham City University
-  year: 2024
+  year: 2025
+  collection-title: Advances on Intelligent Computing and Data Science II
+  publisher: Springer Nature Switzerland
+  url: https://doi.org/10.1007/978-3-031-91351-8_12
   keywords:
     - Wireless Sensor Network (WSN)
     - Smart Cities
